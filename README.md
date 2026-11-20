@@ -1,4 +1,4 @@
-<p align="center"><img src="docs/banner.jpg" alt="TortoiseGMManager" width="256"></p>
+<p align="center"><img src="docs/icon.png" alt="TortoiseGMManager icon" width="64"></p>
 
 # TortoiseGMManager
 
