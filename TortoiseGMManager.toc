@@ -3,6 +3,7 @@
 ## Notes: Compact GM command manager with searchable server-backed lookups for Tortoise WoW 1.18.1.
 ## Author: Sagiroth
 ## Version: 0.7.8
+## IconTexture: Interface\AddOns\TortoiseGMManager\assets\icon
 ## SavedVariables: TortoiseGMManagerDB
 
 Data.lua

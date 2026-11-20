@@ -131,13 +131,14 @@ main:RegisterForDrag("LeftButton")
 main:SetScript("OnDragStart", function() this:StartMoving() end)
 main:SetScript("OnDragStop", function() this:StopMovingOrSizing(); saveMainPosition(this) end)
 -- Same brand pattern as TortoiseBotsManager: two-tone name + version, and a
--- meta line underneath. The "ban hammer" (Sulfuras) marks the GM tool.
-local BRAND_ICON = "Interface\\Icons\\INV_Hammer_Unique_Sulfuras"
+-- meta line underneath.
+local BRAND_ICON = "Interface\\AddOns\\TortoiseGMManager\\assets\\icon"
 local version = tostring(TortoiseGMManager.version or "?")
 Theme.Window(main, {
     title = "|cffd8a657Tortoise|r|cff6cb8ffGM|r |cfffff2ccManager|r  |cffffd200v" .. version .. "|r",
     subtitle = "TGMM " .. version .. " · GM command palette · by Sagiroth",
     icon = BRAND_ICON,
+    roundIcon = true,
     headerHeight = HEADER_HEIGHT,
 })
 main:Hide()
@@ -1008,12 +1009,15 @@ local minimapButton = CreateFrame("Button", "TortoiseGMManagerMinimapButton", Mi
 minimapButton:SetWidth(30); minimapButton:SetHeight(30); minimapButton:SetFrameStrata("MEDIUM")
 minimapButton:SetPoint("CENTER", Minimap, "CENTER", TortoiseGMManagerDB.minimapX or 52, TortoiseGMManagerDB.minimapY or 52)
 minimapButton:RegisterForClicks("LeftButtonUp"); minimapButton:RegisterForDrag("LeftButton")
-local minimapIcon = minimapButton:CreateTexture(nil, "BACKGROUND")
-minimapIcon:SetWidth(20); minimapIcon:SetHeight(20); minimapIcon:SetPoint("CENTER", minimapButton, "CENTER", 0, 0)
-minimapIcon:SetTexture(BRAND_ICON); minimapIcon:SetTexCoord(0.08, 0.92, 0.08, 0.92)
-local minimapBorder = minimapButton:CreateTexture(nil, "OVERLAY")
-minimapBorder:SetWidth(52); minimapBorder:SetHeight(52); minimapBorder:SetPoint("TOPLEFT", minimapButton, "TOPLEFT", 0, 0)
-minimapBorder:SetTexture("Interface\\Minimap\\MiniMap-TrackingBorder")
+-- The logo carries its own gold ring, so it needs no stock tracking border; 24 px matches other buttons.
+-- A slightly larger gold disc behind it thickens the ring so it stands out against the map.
+local minimapBack = minimapButton:CreateTexture(nil, "BACKGROUND")
+minimapBack:SetWidth(27); minimapBack:SetHeight(27); minimapBack:SetPoint("CENTER", minimapButton, "CENTER", 0, 0)
+minimapBack:SetTexture("Interface\\CharacterFrame\\TempPortraitAlphaMask")
+minimapBack:SetVertexColor(Theme.colors.goldDim[1], Theme.colors.goldDim[2], Theme.colors.goldDim[3], 0.7)
+local minimapIcon = minimapButton:CreateTexture(nil, "ARTWORK")
+minimapIcon:SetWidth(24); minimapIcon:SetHeight(24); minimapIcon:SetPoint("CENTER", minimapButton, "CENTER", 0, 0)
+minimapIcon:SetTexture(BRAND_ICON)
 minimapButton:SetHighlightTexture("Interface\\Minimap\\UI-Minimap-ZoomButton-Highlight")
 TortoiseGMManager.minimapButton = minimapButton
 
