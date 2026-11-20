@@ -165,6 +165,8 @@ function Theme.Window(frame, options)
     icon:SetPoint("TOPLEFT", frame, "TOPLEFT", 14, -math.floor((headerHeight - iconSize) / 2) - 1)
     icon:SetTexture(options.icon or "Interface\\Icons\\INV_Misc_Gear_01")
     icon:SetBorderColor(C.goldDim[1], C.goldDim[2], C.goldDim[3], 1)
+    -- The round brand logo has transparent corners: show it whole, without the square frame.
+    if options.roundIcon then icon:SetTexCoord(0, 1, 0, 1); icon.border:SetAlpha(0) end
 
     local title = Theme.Text(frame, 14, C.gold)
     title:SetText(options.title or "")
